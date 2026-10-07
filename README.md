@@ -37,7 +37,7 @@ revou-coding-camp/
         └── project.md
 ```
 
-## Bahasa pemrograman yang digunakan
+## teknologi yang saya gunakan
 
 - HTML5
 - CSS3
