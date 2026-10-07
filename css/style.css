@@ -1,0 +1,583 @@
+/* =============================================
+   RESET & BASE
+   ============================================= */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* =============================================
+   CSS VARIABLES — dipakai oleh semua tema
+   ============================================= */
+
+/* DEFAULT = Original (ungu, persis gambar awal) */
+:root {
+  --bg-body:        linear-gradient(135deg, #3b3b8a 0%, #5a3e9b 50%, #4a2d7a 100%);
+  --bg-card:        #c8c8d8;
+  --bg-card-item:   #d8d8e8;
+  --bg-input:       #e8e8f4;
+  --bg-btn-neutral: #d8d8e8;
+  --border-color:   #9999bb;
+  --border-neutral: #8888aa;
+  --text-primary:   #1a1a2e;
+  --text-secondary: #3a3a5c;
+  --text-muted:     #7777aa;
+  --accent:         #4a6cf7;
+  --accent-hover:   #3a5ce7;
+  --btn-neutral-hover: #b8b8cc;
+  --theme-bar-bg:   rgba(0, 0, 0, 0.25);
+  --theme-bar-text: #e0e0ff;
+  --theme-btn-bg:   rgba(255,255,255,0.15);
+  --theme-btn-hover: rgba(255,255,255,0.28);
+  --theme-btn-active: rgba(255,255,255,0.35);
+}
+
+/* LIGHT theme — putih / abu terang */
+body.theme-light {
+  --bg-body:        linear-gradient(135deg, #e8eaf6 0%, #f3e5f5 50%, #e1f5fe 100%);
+  --bg-card:        #ffffff;
+  --bg-card-item:   #f0f0f8;
+  --bg-input:       #f5f5ff;
+  --bg-btn-neutral: #e8e8f5;
+  --border-color:   #b0b0d0;
+  --border-neutral: #b8b8cc;
+  --text-primary:   #111128;
+  --text-secondary: #333355;
+  --text-muted:     #8888aa;
+  --accent:         #4a6cf7;
+  --accent-hover:   #3a5ce7;
+  --btn-neutral-hover: #d0d0e8;
+  --theme-bar-bg:   rgba(255,255,255,0.55);
+  --theme-bar-text: #333355;
+  --theme-btn-bg:   rgba(74,108,247,0.12);
+  --theme-btn-hover: rgba(74,108,247,0.22);
+  --theme-btn-active: rgba(74,108,247,0.32);
+}
+
+/* DARK theme — hitam gelap */
+body.theme-dark {
+  --bg-body:        linear-gradient(135deg, #0d0d1a 0%, #12122a 50%, #0a0a18 100%);
+  --bg-card:        #1e1e30;
+  --bg-card-item:   #28283e;
+  --bg-input:       #252538;
+  --bg-btn-neutral: #2e2e44;
+  --border-color:   #44446a;
+  --border-neutral: #3a3a58;
+  --text-primary:   #e8e8ff;
+  --text-secondary: #aaaacc;
+  --text-muted:     #6666aa;
+  --accent:         #6a8cff;
+  --accent-hover:   #5a7cef;
+  --btn-neutral-hover: #3a3a58;
+  --theme-bar-bg:   rgba(0, 0, 0, 0.45);
+  --theme-bar-text: #aaaacc;
+  --theme-btn-bg:   rgba(255,255,255,0.08);
+  --theme-btn-hover: rgba(255,255,255,0.16);
+  --theme-btn-active: rgba(255,255,255,0.22);
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 16px;
+  background: var(--bg-body);
+  min-height: 100vh;
+  color: var(--text-primary);
+  transition: background 0.3s, color 0.3s;
+}
+
+
+/* =============================================
+   THEME BAR — tombol pilih tema
+   ============================================= */
+.theme-bar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  padding: 10px 24px;
+  background: var(--theme-bar-bg);
+  backdrop-filter: blur(6px);
+}
+
+.theme-label {
+  font-size: 0.82rem;
+  color: var(--theme-bar-text);
+  margin-right: 2px;
+}
+
+.theme-btn {
+  padding: 5px 14px;
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 20px;
+  background: var(--theme-btn-bg);
+  color: var(--theme-bar-text);
+  font-size: 0.82rem;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.theme-btn:hover {
+  background: var(--theme-btn-hover);
+}
+
+/* Tombol tema yang sedang aktif */
+.theme-btn.active {
+  background: var(--theme-btn-active);
+  border-color: var(--accent);
+  font-weight: 600;
+}
+
+
+/* =============================================
+   LAYOUT: DASHBOARD WRAPPER
+   ============================================= */
+.dashboard {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 24px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+
+/* =============================================
+   CARD — base style untuk semua widget
+   ============================================= */
+.card {
+  background-color: var(--bg-card);
+  border-radius: 12px;
+  padding: 24px;
+  transition: background-color 0.3s;
+}
+
+
+/* =============================================
+   SECTION 1: GREETING CARD
+   ============================================= */
+.greeting-card {
+  text-align: center;
+}
+
+/* Jam besar berwarna biru seperti di gambar */
+.clock {
+  font-size: 3rem;
+  font-weight: 400;
+  color: var(--accent);
+  letter-spacing: 2px;
+  margin-bottom: 4px;
+}
+
+/* Tanggal */
+.date {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+}
+
+/* Teks "Good Morning, Windra" */
+.greeting {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+
+/* =============================================
+   ROW: timer dan tasks sejajar
+   ============================================= */
+.row {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 16px;
+  align-items: start;
+}
+
+
+/* =============================================
+   SECTION 2: FOCUS TIMER
+   ============================================= */
+.timer-card {
+  text-align: center;
+}
+
+.section-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 12px;
+}
+
+/* Angka timer besar berwarna biru */
+.timer-display {
+  font-size: 3.2rem;
+  font-weight: 400;
+  color: var(--accent);
+  margin-bottom: 16px;
+}
+
+/* Wrapper 3 tombol timer */
+.timer-controls {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+/* Tombol Start / Stop / Reset */
+.timer-controls button {
+  padding: 8px 18px;
+  border: 1px solid var(--border-neutral);
+  border-radius: 6px;
+  background-color: var(--bg-btn-neutral);
+  color: var(--text-primary);
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.timer-controls button:hover {
+  background-color: var(--btn-neutral-hover);
+}
+
+/* Challenge: input ganti durasi */
+.timer-custom {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.timer-custom input[type="number"] {
+  width: 60px;
+  padding: 6px 8px;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  background-color: var(--bg-input);
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--text-primary);
+}
+
+.timer-custom input[type="number"]:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+#btn-set-timer {
+  padding: 6px 14px;
+  background-color: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+#btn-set-timer:hover {
+  background-color: var(--accent-hover);
+}
+
+
+/* =============================================
+   SECTION 3: TASKS
+   ============================================= */
+.tasks-card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Form input task + tombol Add */
+.task-form {
+  display: flex;
+  gap: 8px;
+}
+
+.task-form input[type="text"] {
+  flex: 1;
+  padding: 9px 12px;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  background-color: var(--bg-input);
+  font-size: 0.9rem;
+  color: var(--text-primary);
+}
+
+.task-form input[type="text"]:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+.task-form button {
+  padding: 9px 18px;
+  background-color: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.task-form button:hover {
+  background-color: var(--accent-hover);
+}
+
+/* Challenge: sort dropdown */
+.task-sort {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.task-sort select {
+  padding: 5px 8px;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  background-color: var(--bg-input);
+  font-size: 0.85rem;
+  color: var(--text-primary);
+  cursor: pointer;
+}
+
+.task-sort select:focus {
+  outline: 2px solid var(--accent);
+}
+
+/* List tugas */
+.task-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Setiap item task */
+.task-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  background-color: var(--bg-card-item);
+  border-radius: 6px;
+  transition: background-color 0.3s;
+}
+
+.task-item input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+  accent-color: var(--accent);
+  flex-shrink: 0;
+}
+
+/* Teks nama task */
+.task-item .task-name {
+  flex: 1;
+  font-size: 0.95rem;
+  color: var(--text-primary);
+  word-break: break-word;
+}
+
+/* Task yang sudah dicentang — diberi coret */
+.task-item.done .task-name {
+  text-decoration: line-through;
+  color: var(--text-muted);
+}
+
+/* Tombol Delete per task */
+.task-item .btn-delete-task {
+  padding: 5px 12px;
+  background-color: #d94f4f;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background-color 0.2s;
+}
+
+.task-item .btn-delete-task:hover {
+  background-color: #bb3333;
+}
+
+/* Tombol Edit per task */
+.task-item .btn-edit-task {
+  padding: 5px 12px;
+  background-color: #5a7adf;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background-color 0.2s;
+}
+
+.task-item .btn-edit-task:hover {
+  background-color: #3a5abf;
+}
+
+/* Input inline saat mode edit aktif */
+.task-item .task-edit-input {
+  flex: 1;
+  padding: 5px 8px;
+  border: 1px solid var(--accent);
+  border-radius: 6px;
+  background-color: var(--bg-input);
+  font-size: 0.92rem;
+  color: var(--text-primary);
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(74, 108, 247, 0.25);
+}
+
+/* Tombol Save saat mode edit aktif */
+.task-item .btn-save-task {
+  padding: 5px 12px;
+  background-color: #38a169;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background-color 0.2s;
+}
+
+.task-item .btn-save-task:hover {
+  background-color: #276749;
+}
+
+
+/* =============================================
+   SECTION 4: QUICK LINKS
+   ============================================= */
+.links-card {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* Form input link name + URL + tombol Add Link */
+.link-form {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.link-form input[type="text"],
+.link-form input[type="url"] {
+  flex: 1;
+  min-width: 100px;
+  padding: 9px 12px;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  background-color: var(--bg-input);
+  font-size: 0.9rem;
+  color: var(--text-primary);
+}
+
+.link-form input:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+.link-form button {
+  padding: 9px 18px;
+  background-color: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.link-form button:hover {
+  background-color: var(--accent-hover);
+}
+
+/* Area tombol-tombol link */
+.link-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+/* Setiap link item: tombol + tanda x */
+.link-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* Tombol link yang bisa diklik untuk buka website */
+.link-item a {
+  display: inline-block;
+  padding: 9px 16px;
+  background-color: var(--accent);
+  color: #fff;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: background-color 0.2s;
+}
+
+.link-item a:hover {
+  background-color: var(--accent-hover);
+}
+
+/* Tombol X untuk hapus link */
+.link-item .btn-delete-link {
+  padding: 9px 8px;
+  background-color: #3a55cc;
+  color: #fff;
+  border: none;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  line-height: 1;
+  transition: background-color 0.2s;
+}
+
+.link-item .btn-delete-link:hover {
+  background-color: #d94f4f;
+}
+
+
+/* =============================================
+   RESPONSIVE — layar kecil
+   ============================================= */
+@media (max-width: 640px) {
+  .row {
+    grid-template-columns: 1fr;
+  }
+
+  .clock {
+    font-size: 2.2rem;
+  }
+
+  .timer-display {
+    font-size: 2.4rem;
+  }
+
+  .link-form {
+    flex-direction: column;
+  }
+}
