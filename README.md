@@ -46,10 +46,10 @@ revou-coding-camp/
 
 ---
 
-## Cara pake
+## Cara pakai
 
 Tidak perlu instalasi. Buka saja file `index.html` di browser.
 
 ---
 
-Dibuat sebagai bagian dari **RevoU Coding Camp**.
+Dibuat sebagai mini portofolio dan untuk memenuhi syarat mendapatkan e-certificate dari **RevoU Coding Camp**.
