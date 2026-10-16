@@ -2,7 +2,7 @@
 
 Dashboard produktivitas pribadi yang dibuat pakai HTML, CSS, dan JavaScript biasa — tanpa framework, tanpa backend.
 
-🔗 **Live Demo:** [Lihat di GitHub Pages](https://mort6920.github.io/revou-coding-camp)
+🔗 **link:** https://to-do-listgacor.netlify.app
 
 ---
 
